@@ -278,8 +278,9 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
 /______/______/______/______/______/______/______/______/______/______/[TomekK]
 *******************************************************************************''')
             log_text("You open it and inside is a key and a vial of liquid.")
+            log_text("NOTE: IF YOU PRESS I TO INSPECT, YOU WILL RETURN TO THIS PAGE AFTER THE MINI CUTSCENE PLEASE PROCEED TO ENTER Y TO CONTINUE THE GAME")
             
-            keyVial = st.text_input("Do you wish to take both the key and vial? to inspect press (I) take both (Y) or take none (N)").upper()
+            keyVial = st.text_input("Do you wish to take both the key and vial? to inspect press (I) take both (Y) or take none (N) ").upper()
             if keyVial == "N":
                 st.session_state.hasVialKey = False
                 if st.button("Leave Room"): st.session_state.scene = "PATHWAYB"; st.rerun()
