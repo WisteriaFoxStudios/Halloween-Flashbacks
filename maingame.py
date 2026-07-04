@@ -88,7 +88,7 @@ _| |_| |_| |_| |_| |_ |____________| _| |_| |_| |_| |_| |_
         log_text("however, no one was there. Something was off. You're the only person there.")
         log_text("Can you escape this horror?")
         
-        st.caption("ℹ️ Note: If you do not hear music, click anywhere on this page to let your web browser start the track.")
+        st.caption("ℹ️ Note: If you do not hear music, click anywhere on this page to let your web browser start the track. <Creator's note: this is still not working, please understand that currently the creator is still trying to see why the file is failing")
         
         if st.button("Continue to Game Menu"):
             st.session_state.scene = "STARTGAME"
