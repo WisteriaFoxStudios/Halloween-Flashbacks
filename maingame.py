@@ -1,10 +1,19 @@
 from random import randint
-music = Sound("[ALTERNATIVE] Mary's theme Puppet (Out of tune).mp3")
+import pygame
+import time  # Standard library mapping for sleep if needed
+
+# 1. Initialize Pygame core and audio mixer completely
+pygame.init()
+pygame.mixer.init()
+
+# Setup initial game states
+music = pygame.mixer.Sound("[ALTERNATIVE] Mary's theme Puppet (Out of tune).mp3")
 clear()
 setTextColour(WHITE)
 hasVialKey = False
 playGame = True
 scene = "PROLOUGE"
+
 while playGame:
     #scene1
     if scene == "PROLOUGE":
@@ -12,17 +21,17 @@ while playGame:
         setTextColour(WHITE)
         hasVialKey = False
         music.stop()
-        music = Sound("[ALTERNATIVE] Mary's theme Puppet (Out of tune).mp3")
+        music = pygame.mixer.Sound("[ALTERNATIVE] Mary's theme Puppet (Out of tune).mp3")
         music.play()
         print(r'''
-  _   _   _   _   _                    _   _   _   _   _
+  _   _   _   _   _                     _   _   _   _   _
 _| |_| |_| |_| |_| |_  _____________ _| |_| |_| |_| |_| |_
 -| |-| |-| |-| |-| |- | Halloween  | -| |-| |-| |-| |-| |-
  | | | | | | | | | |  | Fashbacks |  | | | | | | | | | | 
 _| |_| |_| |_| |_| |_ |____________| _| |_| |_| |_| |_| |_
 -| |-| |-| |-| |-| |-      | |       -| |-| |-| |-| |-| |-
  |_| |_| |_| |_| |_|       | |        |_| |_|||_| |_| |_| VK
-,,,,,,||,,,,,,,,,,,,       | |     ,,,,,,,,||,,,,,,,,,,,,,,,,''')
+,,,,,,||,,,,,,,,,,,,       | |      ,,,,,,,,||,,,,,,,,,,,,,,,,''')
         setTextColour(DRACULA_RED)
         print("It's been a year since the accident.")
         sleep(2)
@@ -51,6 +60,7 @@ _| |_| |_| |_| |_| |_ |____________| _| |_| |_| |_| |_| |_
         sleep(3)
         scene = "STARTGAME"
         continue
+
     #scene2
     elif scene == "STARTGAME":
         music.stop()
@@ -58,11 +68,11 @@ _| |_| |_| |_| |_| |_ |____________| _| |_| |_| |_| |_| |_
         print("Do you accept this challege to escape?")
         sleep(2)
         print("(Y) To play (N) to quit (B) for Lore/Backstory")
-        startGame=input("what do you say??   ")
+        startGame = input("what do you say??   ")
         if startGame.upper() == "Y":
             scene = "CORNFIELD"
             continue
-        elif startGame.upper()=="B":
+        elif startGame.upper() == "B":
             print("You are the younger sister, Mary Walter.")
             print("Your Older sister, Alice Walter, died 1 year ago.")
             print("after being knocked out, You find yourself back in time.")
@@ -75,7 +85,7 @@ _| |_| |_| |_| |_| |_ |____________| _| |_| |_| |_| |_| |_
             print("Dying doesnt allow you to rest. You simply restart..")
             print("escaping is the only option to end this hellish process.")
             goBack = input("type (Y) here once you've finished reading the lore.   ")
-            if goBack.upper()=="Y":
+            if goBack.upper() == "Y":
                 scene = "STARTGAME"
                 continue
             else:
@@ -84,12 +94,12 @@ _| |_| |_| |_| |_| |_ |____________| _| |_| |_| |_| |_| |_
                 sleep(5)
                 scene = "STARTGAME"
                 continue
-        elif startGame.upper()=="N":
+        elif startGame.upper() == "N":
             areYouSure = input("Are you sure? (Y) to quit (N) to return   ")
-            if areYouSure.upper()=="Y":
+            if areYouSure.upper() == "Y":
                 scene = "QUITSCENE"
                 continue
-            elif areYouSure.upper()=="N":
+            elif areYouSure.upper() == "N":
                 scene = "STARTGAME"
                 continue
             else:
@@ -103,11 +113,14 @@ _| |_| |_| |_| |_| |_ |____________| _| |_| |_| |_| |_| |_
             sleep(8)
             scene = "STARTGAME"
             continue
+
     #scene3
     elif scene == "CORNFIELD":
-        music = Sound("Six's Lullaby (Out of tune).mp3")
-        music.play()
-        music.loop(True)
+        music.stop() # Stop old track safely
+        # FIX: Added pygame.mixer prefix
+        music = pygame.mixer.Sound("Six's Lullaby (Out of tune).mp3")
+        # FIX: Loops are set directly inside the play argument (-1 loops infinitely)
+        music.play(loops=-1)
         clear()
         setTextColour(222, 181, 20)
         print("The eerie silence fills your ears as you enter the cornfield.")
@@ -117,19 +130,19 @@ _| |_| |_| |_| |_| |_ |____________| _| |_| |_| |_| |_| |_
         print("with the words 'Enter if you dare' scratched into the wood.")
         setTextColour(RED)
         print(r'''
-        _________
-        | ENTER | 
-        +IF YOU |
-        |  DARE +
-        +  X X  | 
-        |   V   +
-        |-------|''')
+         _________
+         | ENTER | 
+         +IF YOU |
+         |  DARE +
+         +  X X  | 
+         |   V   +
+         |-------|''')
         sleep(4)
         setTextColour(WHITE)
         print("you walk forward afew steps and now you're at an intersection")
         setTextColour(WHITE)
         pathwayOne = input("back to entrance (B) Left (L) or Right (R)?  ")
-        if pathwayOne.upper()=="R":
+        if pathwayOne.upper() == "R":
             print("You've hit a dead end! ")
             sleep(5)
             print("How bad is your luck? ")
@@ -139,7 +152,7 @@ _| |_| |_| |_| |_| |_ |____________| _| |_| |_| |_| |_| |_
             print("You walk back")
             scene = "INTERSECTIONTWO"
             continue
-        elif pathwayOne.upper()== "B":
+        elif pathwayOne.upper() == "B":
             print("you head back to the entrance.")
             sleep(3)
             print("somehow, as if your attached to strings,")
@@ -151,9 +164,10 @@ _| |_| |_| |_| |_| |_ |____________| _| |_| |_| |_| |_| |_
             sleep(4)
             scene = "INTERSECTIONTWO"
             continue
-        elif pathwayOne.upper() =="L":
+        elif pathwayOne.upper() == "L":
             scene = "INTERSECTIONTWO"
             continue
+
     elif scene == "INTERSECTIONTWO":
         clear()
         print("you go left, and now you see another intersection!")
@@ -166,7 +180,7 @@ _| |_| |_| |_| |_| |_ |____________| _| |_| |_| |_| |_| |_
         sleep(3)
         setTextColour(WHITE)
         pathwayB = input("(L) or (R)?   ")
-        if pathwayB.upper()== "L":
+        if pathwayB.upper() == "L":
             certainAns = input("Are you sure?  (Y) or (N)  ")
             if certainAns.upper() == "Y":
                 print("You walk left and before you can react,")
@@ -174,7 +188,7 @@ _| |_| |_| |_| |_| |_ |____________| _| |_| |_| |_| |_| |_
                 sleep(7)
                 scene = "DEATHSCENESAWC"
                 continue
-            elif certainAns.upper()=="N":
+            elif certainAns.upper() == "N":
                 print("Taking you back...")
                 sleep(3)
                 print("Finished!")
@@ -188,7 +202,7 @@ _| |_| |_| |_| |_| |_ |____________| _| |_| |_| |_| |_| |_
                 scene = "INTERSECTIONTWO"
                 continue
             
-        elif pathwayB.upper()== "R":
+        elif pathwayB.upper() == "R":
             print("Thankfully, The chainsaws and meows fade out,")
             setTextColour(DRACULA_RED)
             print("It's quite lucky, You never know what would have happened")
@@ -196,18 +210,18 @@ _| |_| |_| |_| |_| |_ |____________| _| |_| |_| |_| |_| |_
             sleep(6)
             setTextColour(RED)
             print(r'''
-            .****,,         *zZZZzMeow~*
-             *   .,        
+             .****,,         *zZZZzMeow~*
+              * .,        
               **. ..
-               *    -
+               * -
                 **.  --
-                 *   ..-
+                 * ..-
                   **.  ,.
-                 /\*_____|/\    __
-                (   .   .   )  / _)
-                 /    W     \ / /
-                (  U     U   ) /    
-            ''')
+                  /\*_____|/\    __
+                 (   .   .   )  / _)
+                  /    W     \ / /
+                 (  U     U   ) /    
+             ''')
             sleep(1)
             clear()
             setTextColour(WHITE)
@@ -219,15 +233,16 @@ _| |_| |_| |_| |_| |_ |____________| _| |_| |_| |_| |_| |_
             sleep(6)
             scene = "INTERSECTIONTWO"
             continue
+
     elif scene == "PATHWAY":
         pathwayyY = input("(L) or (R)?  ")
         if pathwayyY.upper() == "R":
             print("Aw sharks, You've hit a dead end. You turn back and head left.")
             print("You walk forward and spot something in the distance")
             sleep(7)
-            scene="CHEST"
+            scene = "CHEST"
             continue
-        elif pathwayyY.upper()=="L":
+        elif pathwayyY.upper() == "L":
             print("You walk forward and spot something in the distance")
             sleep(5)
             scene = "CHEST"
@@ -237,26 +252,26 @@ _| |_| |_| |_| |_| |_ |____________| _| |_| |_| |_| |_| |_
             sleep(6)
             scene = "CHEST"
             continue
+
     elif scene == "CHEST":
         clear()
         print("Heading towards what seemed like an object, you see that it was a chest!")
         sleep(4)
         print(r'''*******************************************************************************
-          |                   |                  |                     |
+          |                    |                  |                     |
  _________|________________.=""_;=.______________|_____________________|_______
-|                   |  ,-"_,=""     `"=.|                  |
-|___________________|__"=._o`"-._        `"=.______________|___________________
-          |                `"=._o`"=._      _`"=._                     |
+|                    |  ,-"_,=""     `"=.|                  |
+|___________________|__"=._o`"-._        `"=._o`"=._       _`"=._                    |
  _________|_____________________:=._o "=._."_.-="'"=.__________________|_______
-|                   |    __.--" , ; `"=._o." ,-"""-._ ".   |
-|___________________|_._"  ,. .` ` `` ,  `"-._"-._   ". '__|___________________
+|                    |    __.--" , ; `"=._o." ,-"""-._ ".   |
+|___________________|_._"   ,. .` ` `` ,  `"-._"-._   ". '__|___________________
           |           |o`"=._` , "` `; .". ,  "-._"-._; ;              |
  _________|___________| ;`-.o`"=._; ." ` '`."\` . "-._ /_______________|_______
-|                   | |o;    `"-.o`"=._``  '` " ,__.--o;   |
-|___________________|_| ;     (#) `-.o `"=.`_.--"_o.-; ;___|___________________
-____/______/______/___|o;._    "      `".o|o_.--"    ;o;____/______/______/____
+|                    | |o;    `"-.o`"=._``  '` " ,__.--o;   |
+|___________________|_| ;      (#) `-.o `"=.`_.--"_o.-; ;___|___________________
+____/______/______/___|o;._     "       `".o|o_.--"    ;o;____/______/______/____
 /______/______/______/_"=._o--._        ; | ;        ; ;/______/______/______/_
-____/______/______/______/__"=._o--._   ;o|o;     _._;o;____/______/______/____
+____/______/______/______/__"=._o--._   ;o|o;      _._;o;____/______/______/____
 /______/______/______/______/____"=._o._; | ;_.--"o.--"_/______/______/______/_
 ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
 /______/______/______/______/______/______/______/______/______/______/[TomekK]
@@ -264,12 +279,12 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
         print("You open it and inside is a key and a vial of liquid.")
         sleep(6)
         if hasVialKey == False:
-            keyVial=input("Do you wish to take both the key and vial? to inspect press (I) take both (Y) or take none (N)")
-            if keyVial.upper()=="N":
+            keyVial = input("Do you wish to take both the key and vial? to inspect press (I) take both (Y) or take none (N)")
+            if keyVial.upper() == "N":
                 hasVialKey = False
                 scene = "PATHWAYB" 
                 continue
-            elif keyVial.upper()=="Y":
+            elif keyVial.upper() == "Y":
                 print("You've collected the key and vial.")
                 sleep(5)
                 print("swirling arround the vial, it seems like a potion")
@@ -280,7 +295,7 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
     ) (
    /`-.\
   /     \
- / _    _\
+ / _   _\
 :,' `-.' `:
 |         |
 :         ;
@@ -288,11 +303,11 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
   `.___.' ''')
                 print("however, it seemed clear. you keep it, incase you needed to make a potion of some sort.")
                 sleep(8)
-                hasVialKey=True
-                scene= "PATHWAYB"
+                hasVialKey = True
+                scene = "PATHWAYB"
                 continue
             
-            elif keyVial.upper()=="I":
+            elif keyVial.upper() == "I":
                 print("Picking up the vial, you see that it seems clear,")
                 print("apon smell it has a strong foral and salty scent.")
                 sleep(5)
@@ -300,7 +315,7 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
                 print("engraved on it, states 'OH THE LOVELY WORLD THE MASTER HAS CREATED'")
                 print("what an intresting ingravement.")
                 doYouWantIt = input("Do you wish to take the key and vial?   ")
-                if doYouWantIt.upper()=="Y":
+                if doYouWantIt.upper() == "Y":
                     print("You've collected the key and vial.")
                     sleep(5)
                     print("swirling arround the vial, it seems like a potion")
@@ -311,7 +326,7 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
     ) (
    /`-.\
   /     \
- / _    _\
+ / _   _\
 :,' `-.' `:
 |         |
 :         ;
@@ -319,10 +334,10 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
   `.___.' ''')
                     print("however, it seemed clear. you keep it, incase you needed to make a potion of some sort.")
                     sleep(8)
-                    hasVialKey=True
-                    scene= "PATHWAYB"
+                    hasVialKey = True
+                    scene = "PATHWAYB"
                     continue
-                elif doYouWantIt.upper()=="N":
+                elif doYouWantIt.upper() == "N":
                     hasVialKey = False
                     scene = "PATHWAYB"
                     continue
@@ -336,13 +351,14 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
                 sleep(6)
                 scene = "CHEST"
                 continue
+
     elif scene == "PATHWAYB":
         clear()
         setTextColour(222, 181, 20)
         print("You turn around the corner, and see three intersections")
         print("you cant tell what creature is where but you must make a move..")
         pathwayS = input("(L) (R) or (F)? (F is forward)")
-        if pathwayS.upper()== "L":
+        if pathwayS.upper() == "L":
             certainAns = input("Are you sure?  (Y) or (N)  ")
             if certainAns.upper() == "Y":
                 deathScene = randint(1, 3)
@@ -356,7 +372,7 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
             elif certainAns.upper() == "N":
                 print("Taking you back...")
                 sleep(3)
-                scene="PATHWAYB"
+                scene = "PATHWAYB"
                 continue
             else:
                 print("You have to type Y or N!")
@@ -365,16 +381,16 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
                 scene = "PATHWAYB"
                 continue
             
-        elif pathwayS.upper()=="F":
-            scene="SURVIVEDBARELY"
+        elif pathwayS.upper() == "F":
+            scene = "SURVIVEDBARELY"
             continue
-        elif pathwayS.upper()=="R":
+        elif pathwayS.upper() == "R":
             print("You've hit a dead end,")
             print("You go back.")
             sleep(7)
             pathwayV = input("(L) or (F)?")
-            if pathwayV.upper()=="L":
-                deathScene= randint (1,3) 
+            if pathwayV.upper() == "L":
+                deathScene = randint(1, 3) 
                 if deathScene == 1:
                     scene = "DEATHSCENESAWC"
                     continue
@@ -382,10 +398,10 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
                     scene = "DEATHCRUSHED"
                     continue
                 elif deathScene == 3:
-                    scene= "DEATHSHREDS"
+                    scene = "DEATHSHREDS"
                     continue
-            elif pathwayV.upper()=="F":
-                scene="SURVIVEDBARELY"
+            elif pathwayV.upper() == "F":
+                scene = "SURVIVEDBARELY"
                 continue
             else:
                 print("answer L or F only.")
@@ -398,7 +414,8 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
             sleep(3)
             scene = "PATHWAYB"
             continue
-    elif scene =="SURVIVEDBARELY":
+
+    elif scene == "SURVIVEDBARELY":
         clear()
         setTextColour(WHITE)
         print("A sigh of relief escapes you.")
@@ -445,7 +462,7 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
 ''')
         
         if hasVialKey == True:
-            scene ="HOUSEOFLIFEANDDEATH"
+            scene = "HOUSEOFLIFEANDDEATH"
             continue
         elif hasVialKey == False:
             print("with no key, you try breaking down the door.")
@@ -455,8 +472,9 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
             setTextColour(RED)
             print("you see that the killer is standing right infront of you..")
             sleep(6)
-            scene="CAUGHTDEATH"
+            scene = "CAUGHTDEATH"
             continue
+
     elif scene == "HOUSEOFLIFEANDDEATH":
         sleep(5)
         print("you're about to cry in dispair,")
@@ -498,10 +516,10 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
             print("and your soul drifts away..")
             scene = "CAUGHTDEATHDOORV"
             continue
-        elif doorChoice.upper()=="L2":
+        elif doorChoice.upper() == "L2":
             scene = "SAFEFORNOW"
             continue
-        elif doorChoice.upper()=="R":
+        elif doorChoice.upper() == "R":
             print("it's a study, a table with some culdron in the center")
             sleep(2)
             print("there's no where to hide.")
@@ -543,6 +561,7 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
             clear()
             scene = "HOUSEOFLIFEANDDEATH"
             continue
+
     elif scene == "SAFEFORNOW":
         clear()
         print("You rush into the Laundry room. A closet!")
@@ -557,12 +576,11 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
 | | |_|_|_|_| | |
 | |    ___    | |
 | |   [___] ()| |
-
 | |         ||| |
 | |         ()| |
-| |           | |
-| |           | |
-| |           | |
+| |            | |
+| |            | |
+| |            | |
 |_|___________|_|''')
         print("You rush towards the closet,")
         print("hiding behind a stack of baskets filled with dust blacketed laundry,")
@@ -616,7 +634,7 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
         print("however in the middle, a table, with an empty culdron and ingredients.")
         print(r'''
                 
-               
+                
            ___________
           (___________)
            /         \
@@ -630,32 +648,34 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
         sleep(8)
         scene = "POTIONMASTER"
         continue
+
     elif scene == "POTIONMASTER":
         clear()
         print("You glance down on the table, the ingredients are:")
         print("Rosemary(RM) Cat Eyeballs (CE) Butterfly Wings (BW) and Blue Blood (BB)")
         sleep(6)
         print("there's also a note, You pick it up and read it.")
+        # FIX: Adjusted the bottom of the triple string to 3 quotes (fixing the SyntaxError from your initial run)
         print(r'''
         
-           .-.---------------------------------.-.
-          ((o))                                   )
-           \U/_______          _____         ____/
-             |            TICK TOCK             |
-             |      TIME IS COUNTING DOWN!      |
-             |   CAN YOU ORDER THINGS RIGHT?    |
-             |           HURRY HURRY!           |
-             |  BEFORE THE CLOCK HITS MIDNIGHT! |
-             |     OR ARE YOU DOOMED TO DIE?    |
-             |         YOUR ONLY HINT IS        |
-             |              ROSEMARY.           |
-             |            HURRY HURRY!          |
-             |   OR BE STUCK WITH INEVITABLE    |
-             |              DEATH.              |
-             |____    _______    __  ____    ___|
-            /A\                                  \
-           ((o))                                  )
-            `-`----------------------------------`''')
+            .-.---------------------------------.-.
+           ((o))                                    )
+            \U/_______           _____         ____/
+              |            TICK TOCK             |
+              |       TIME IS COUNTING DOWN!     |
+              |    CAN YOU ORDER THINGS RIGHT?   |
+              |            HURRY HURRY!          |
+              |   BEFORE THE CLOCK HITS MIDNIGHT! |
+              |      OR ARE YOU DOOMED TO DIE?    |
+              |          YOUR ONLY HINT IS        |
+              |               ROSEMARY.          |
+              |             HURRY HURRY!         |
+              |    OR BE STUCK WITH INEVITABLE   |
+              |               DEATH.             |
+              |____   _______    __  ____    ___|
+             /A\                                  \
+            ((o))                                  )
+             `-`----------------------------------`''')
         sleep(15)
         print("You quickly grab your vial.")
         sleep(5)
@@ -672,21 +692,21 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
      ____\             /____
     ()____'.__     __.'____()
     jgs  .'` .'```'. `-.
-        ().'`       `'.()''')
+        ().'`        `'.()''')
         print("the culdron starts to heat up by itself.")
         sleep(6)
         ingredientOne = input("(RM), (BW), (CE) or (BB)?")
-        if ingredientOne.upper()=="BB":
+        if ingredientOne.upper() == "BB":
             print("the potion bubbles uncontrolably, as you try to fix it, it explodes.")
             sleep(5)
             scene = "POTIONMISTAKEDEATH"
             continue
-        elif ingredientOne.upper()=="CE":
+        elif ingredientOne.upper() == "CE":
             print("the potion bubbles uncontrolably, as you try to fix it, it explodes.")
             sleep(5)
             scene = "POTIONMISTAKEDEATH"
             continue
-        elif ingredientOne.upper()=="BW":
+        elif ingredientOne.upper() == "BW":
             print("the potion bubbles uncontrolably, as you try to fix it, it explodes.")
             sleep(5)
             scene = "POTIONMISTAKEDEATH"
@@ -706,18 +726,18 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
      ____\             /____
     ()____'.__     __.'____()
     c e  .'` .'```'. `-.
-        ().'`       `'.()
+        ().'`        `'.()
 ''')
             setTextColour(WHITE)
             print("it puffs a green smoke.")
             sleep(7)
             ingredientTwo = input("(BW), (BB) or (CE)?")
-            if ingredientTwo.upper()=="BW":
+            if ingredientTwo.upper() == "BW":
                 print("the potion bubbles uncontrolably, as you try to fix it, it explodes.")
                 sleep(5)
                 scene = "POTIONMISTAKEDEATH"
                 continue
-            elif ingredientTwo.upper()=="BB":
+            elif ingredientTwo.upper() == "BB":
                 print("the potion bubbles uncontrolably, as you try to fix it, it explodes.")
                 sleep(5)
                 scene = "POTIONMISTAKEDEATH"
@@ -737,7 +757,7 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
      ____\             /____
     ()____'.__     __.'____()
     b    .'` .'```'. `-.
-        ().'`       `'.()
+        ().'`        `'.()
 ''')
                 setTextColour(WHITE)
                 print("it puffs a Violet smoke.")
@@ -748,7 +768,7 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
                     sleep(5)
                     scene = "POTIONMISTAKEDEATH"
                     continue
-                elif ingredientThr.upper()=="BB":
+                elif ingredientThr.upper() == "BB":
                     print("you grab the vial of blue blood and pour it in.")
                     setTextColour(CYAN)
                     print(r'''
@@ -763,7 +783,7 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
      ____\             /____
     ()____'.__     __.'____()
          .'` .'```'. `-.
-        ().'`       `'.()
+        ().'`        `'.()
 ''')
                     setTextColour(WHITE)
                     print("it puffs a cyan smoke.")
@@ -781,12 +801,13 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
                     print("thank gods it's over. You breath a sigh of relief.")
                     scene = "GOODENDING"
                     continue
-    elif scene =="DEATHSCENESAWC":
+
+    elif scene == "DEATHSCENESAWC":
         clear()
         music.stop()
-        music = Sound("Final Duet (Out of tune).mp3")
-        music.loop()
-        music.play()
+        # FIX: Added pygame.mixer prefix
+        music = pygame.mixer.Sound("Final Duet (Out of tune).mp3")
+        music.play(loops=-1)
         print("you see at Cat, but don't see the saw.")
         print("it cuts your body into chunks,")
         print("the pain agonizingly strong.")
@@ -809,15 +830,18 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
         print("IT'S CALLED HOW TO SURVIVE YOUR MURDER")
         sleep(3)
         print("FINISHED!")
-        music.stopAll()
+        # FIX: Changed stopAll() to standard pygame module stop
+        pygame.mixer.stop()
         hasVialKey = False
         sleep(3)
         scene = "PROLOUGE"
         continue
-    elif scene=="DEATHCRUSHED":
+
+    elif scene == "DEATHCRUSHED":
         clear()
         music.stop()
-        music = Sound("Final Duet (Out of tune).mp3")
+        # FIX: Added pygame.mixer prefix
+        music = pygame.mixer.Sound("Final Duet (Out of tune).mp3")
         music.play()
         print("You feel your rib cage getting crushed,")
         print("They pierce your lungs and heart..")
@@ -838,14 +862,18 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
         print(" WONDER WHY...")
         sleep(3)
         print("FINISHED!")
-        music.stopAll()
+        # FIX: Changed stopAll() to standard pygame module stop
+        pygame.mixer.stop()
         hasVialKey = False
         sleep(3)
         scene = "PROLOUGE"
-    elif scene =="DEATHSHREDS":
+        continue
+
+    elif scene == "DEATHSHREDS":
         clear()
         music.stop()
-        music = Sound("Final Duet (Out of tune).mp3")
+        # FIX: Added pygame.mixer prefix
+        music = pygame.mixer.Sound("Final Duet (Out of tune).mp3")
         music.play()
         print("you see a claw, and in seconds you black out.")
         print("all you see before you close your eyes for the last time,")
@@ -869,12 +897,16 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
         print("FINISHED!")
         hasVialKey = False
         sleep(2)
-        music.stopAll()
+        # FIX: Changed stopAll() to standard pygame module stop
+        pygame.mixer.stop()
         scene = "PROLOUGE"
-    elif scene =="CAUGHTDEATHDOORV":
+        continue
+
+    elif scene == "CAUGHTDEATHDOORV":
         clear()
         music.stop()
-        music = Sound("Final Duet (Out of tune).mp3")
+        # FIX: Added pygame.mixer prefix
+        music = pygame.mixer.Sound("Final Duet (Out of tune).mp3")
         music.play()
         print("Don't be selfish.")
         print("You're not done preforming puppet.")
@@ -894,12 +926,16 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
         print("FINISHED!")
         hasVialKey = False
         sleep(2)
-        music.stopAll()
+        # FIX: Changed stopAll() to standard pygame module stop
+        pygame.mixer.stop()
         scene = "PROLOUGE"
-    elif scene =="POTIONMISTAKEDEATH":
+        continue
+
+    elif scene == "POTIONMISTAKEDEATH":
         clear()
         music.stop()
-        music = Sound("Final Duet (Out of tune).mp3")
+        # FIX: Added pygame.mixer prefix
+        music = pygame.mixer.Sound("Final Duet (Out of tune).mp3")
         music.play()
         sleep(15)
         print("REVIVING...")
@@ -912,9 +948,11 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
         print("FINISHED!")
         hasVialKey = False
         sleep(2)
-        music.stopAll()
+        # FIX: Changed stopAll() to standard pygame module stop
+        pygame.mixer.stop()
         scene = "PROLOUGE"
         continue
+        
     elif scene == "CAUGHTDEATH":
         print("Before you utter a word, your head is hacked off,")
         print("and as quickly as it is hacked off, your invisible puppeteer")
@@ -925,9 +963,11 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
         print("NOW WORK BETTER AND ENTERTAIN BETTER.")
         hasVialKey = False
         sleep(3)
-        music.stopAll()
-        scene ="PROLOUGE"
+        # FIX: Changed stopAll() to standard pygame module stop
+        pygame.mixer.stop()
+        scene = "PROLOUGE"
         continue
+
     elif scene == "QUITSCENE":
         music.stop()
         print(": (")
@@ -936,17 +976,18 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
         print("Please do try the game!")
         scene = "PROLOUGE"
         continue
+
     elif scene == "GOODENDING":
         music.stop()
-        music= Sound("Merry Go Round of Life (Out of Tune).mp3")
-        music.play()
-        music.loop()
+        # FIX: Added pygame.mixer prefix
+        music = pygame.mixer.Sound("Merry Go Round of Life (Out of Tune).mp3")
+        music.play(loops=-1)
         clear()
         print("Thank you so much for playing my game!")
         setTextSize(LARGE_FONT)
-        print(r'''                     へ  ♡       
+        print(r'''                    へ  ♡       
                 ૮  >  <) 
-                /  ⁻  ៸|                                                                                      
+                /  ⁻  ៸|                                                                                                                    
               乀(ˍ, ل ل   ''')
         setTextSize(MEDIUM_FONT)
         setTextColour(120, 94, 143)
@@ -980,4 +1021,3 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
         sleep(10)
         hasVialKey = False
         playGame = False
-        
