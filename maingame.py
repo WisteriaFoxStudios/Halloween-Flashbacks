@@ -185,7 +185,7 @@ _| |_| |_| |_| |_| |_ |____________| _| |_| |_| |_| |_| |_
     # SCENE: INTERSECTIONTWO
     # ==========================================
     elif st.session_state.scene == "INTERSECTIONTWO":
-        st.title("🔀 The Second Intersection")
+        st.title("🔪 Hm? is that a chainsaw...?")
         log_text("you go left, and now you see another intersection!")
         log_text("you hear growling noise like what a chainsaw makes", "DRACULA_RED")
         log_text("and a cat noise at the same time,", "DRACULA_RED")
@@ -236,7 +236,7 @@ _| |_| |_| |_| |_| |_ |____________| _| |_| |_| |_| |_| |_
     # SCENE: PATHWAY
     # ==========================================
     elif st.session_state.scene == "PATHWAY":
-        st.title("🛤️ Dark Pathway")
+        st.title("Is this safe?")
         pathwayyY = st.text_input("(L) or (R)?  ").upper()
         if pathwayyY == "R":
             log_text("Aw sharks, You've hit a dead end. You turn back and head left.")
@@ -253,7 +253,7 @@ _| |_| |_| |_| |_| |_ |____________| _| |_| |_| |_| |_| |_
     # SCENE: CHEST
     # ==========================================
     elif st.session_state.scene == "CHEST":
-        st.title("📦 The Chest Discovery")
+        st.title("🗝️ Hm? I wonder what's this going to do for me..")
         
         if st.session_state.chest_step == "CHOOSE":
             log_text("Heading towards what seemed like an object, you see that it was a chest!")
@@ -345,7 +345,7 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
     # SCENE: PATHWAYB
     # ==========================================
     elif st.session_state.scene == "PATHWAYB":
-        st.title("🔱 Triple Corner Intersection")
+        st.title("It's so silent.. is there anyone here?")
         log_text("You turn around the corner, and see three intersections", "GOLD")
         log_text("you cant tell what creature is where but you must make a move..")
         
@@ -388,7 +388,7 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
     # SCENE: SURVIVEDBARELY (ORIGINAL DIALOGUE RESTORED)
     # ==========================================
     elif st.session_state.scene == "SURVIVEDBARELY":
-        st.title("🏡 The Locked Manor")
+        st.title("🚪 So this is what that was for..!")
         log_text("A sigh of relief escapes you.")
         log_text("It's alright, you reasure yourself.")
         log_text("But you know it's not.")
@@ -434,7 +434,7 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
     # SCENE: HOUSEOFLIFEANDDEATH
     # ==========================================
     elif st.session_state.scene == "HOUSEOFLIFEANDDEATH":
-        st.title("🚪 The Foyer Decisions")
+        st.title("🍀 My luck might end here..")
         log_text("you're about to cry in dispair,")
         log_text("but you remember you have a Key!")
         st.code(r'''⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣤⣤⣤⣤⣤⣤⣤⣤⣤⠀⠀⠀⠀⠀⠀⠀⠀
@@ -494,7 +494,7 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
     # SCENE: SAFEFORNOW
     # ==========================================
     elif st.session_state.scene == "SAFEFORNOW":
-        st.title("🧺 The Closet Hideout")
+        st.title("🧺 It smells in here.. but that's better than dying I suppose.")
         log_text("You rush into the Laundry room. A closet!")
         st.code(r'''
              ______________
@@ -550,7 +550,7 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
     # SCENE: POTIONMASTER
     # ==========================================
     elif st.session_state.scene == "POTIONMASTER":
-        st.title("🧪 Alchemical Laboratory")
+        st.title("⚗️ I better not get burned alive for committing witchcraft")
         log_text("You glance down on the table, the ingredients are:")
         log_text("Rosemary(RM) Cat Eyeballs (CE) Butterfly Wings (BW) and Blue Blood (BB)")
         log_text("there's also a note, You pick it up and read it.")
@@ -669,8 +669,8 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
     # DEATH SCENES GRAPH
     # ==========================================
     elif st.session_state.scene == "DEATHSCENESAWC":
-        st.title("💀 Death Room")
-        log_text("you see at Cat, but don't see the saw.")
+        st.title("What a cute cat!")
+        log_text("you see at Cat, but don't see the saw in time.")
         log_text("it cuts your body into chunks,")
         log_text("the pain agonizingly strong.")
         log_text("You feel your soul slipping from your body's grasp..")
@@ -691,7 +691,7 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
         if st.button("Respawn"): st.session_state.scene = "PROLOUGE"; st.rerun()
 
     elif st.session_state.scene == "DEATHCRUSHED":
-        st.title("💀 Crushed Loop")
+        st.title("A barely audible *snap* occurrs...")
         log_text("You feel your rib cage getting crushed,")
         log_text("They pierce your lungs and heart..")
         log_text("your soul escapes..")
@@ -705,13 +705,13 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
         log_text("SENDING BACK TO HOME...")
         log_text("DID YOU KNOW: MARY HAS A FEAR OF WEREWOLVES")
         log_text("AND ANYONE WHO'S WEARING A MASK NOW...")
-        log_text(" WONDER WHY...")
+        log_text("I WONDER WHY...")
         log_text("FINISHED!")
         st.session_state.hasVialKey = False
         if st.button("Respawn"): st.session_state.scene = "PROLOUGE"; st.rerun()
 
     elif st.session_state.scene == "DEATHSHREDS":
-        st.title("💀 Shredded Loop")
+        st.title("How dreadful...")
         log_text("you see a claw, and in seconds you black out.")
         log_text("all you see before you close your eyes for the last time,")
         log_text("Is your dismantled body. shredded into peices..")
@@ -732,7 +732,7 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
         if st.button("Respawn"): st.session_state.scene = "PROLOUGE"; st.rerun()
 
     elif st.session_state.scene == "CAUGHTDEATHDOORV":
-        st.title("💀 Caught at the Threshold")
+        st.title("Who is this voice..?")
         log_text("Don't be selfish.")
         log_text("You're not done preforming puppet.")
         log_text("How about I give you a hint. Laundry room's the safest.")
@@ -749,7 +749,7 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
         if st.button("Respawn"): st.session_state.scene = "PROLOUGE"; st.rerun()
 
     elif st.session_state.scene == "POTIONMISTAKEDEATH":
-        st.title("💀 Volatile Flashback")
+        st.title("As Mary's Drama Teacher use to say, 'So close, yet so far.'")
         log_text("REVIVING...")
         log_text("SENDING BACK TO HOME...")
         log_text("HINT TO SURVIVE: LOOK AT THE CULDRON,")
@@ -759,7 +759,7 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
         if st.button("Respawn"): st.session_state.scene = "PROLOUGE"; st.rerun()
 
     elif st.session_state.scene == "CAUGHTDEATH":
-        st.title("💀 Execution Loop")
+        st.title("Don't you get it? This is fate.")
         log_text("Before you utter a word, your head is hacked off,")
         log_text("and as quickly as it is hacked off, your invisible puppeteer")
         log_text("master attaches it back on...")
@@ -775,8 +775,8 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
         st.title("Farewell")
         log_text(": (")
         log_text("Why quit?")
-        log_text(" I put alot of work into this!")
-        log_text("Please do try the game!")
+        log_text(" I put alot of work into this! :(")
+        log_text("Please do try the game!><")
         if st.button("Return to Start"): st.session_state.scene = "PROLOUGE"; st.rerun()
 
     # ==========================================
