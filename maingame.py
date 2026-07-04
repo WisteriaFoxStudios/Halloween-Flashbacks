@@ -598,13 +598,18 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
         elif ingredientOne == "RM":
             log_text("you grab the small branch of rosemary and drop it in.")
             st.code(r'''
+     
               (
                )  )
            ______(____
           (___________)
            /         \
+          /           \
+         |             |
+     ____\             /____
     ()____'.__     __.'____()
-        ().'`        `'.()
+    c e  .'` .'```'. `-.
+        ().'`       `'.()
 ''')
             log_text("it puffs a green smoke.", "GREEN")
             
@@ -615,13 +620,18 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
             elif ingredientTwo == "CE":
                 log_text("you grab the two eyeballs and drop it in, your stomach crawls with disgust.")
                 st.code(r'''
+                
               (
                )  )
            ______(____
           (___________)
+           /         \
+          /           \
          |    b        |
+     ____\             /____
     ()____'.__     __.'____()
-        ().'`        `'.()
+    b    .'` .'```'. `-.
+        ().'`       `'.()
 ''')
                 log_text("it puffs a Violet smoke.", "VIOLET")
                 
@@ -632,13 +642,18 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
                 elif ingredientThr == "BB":
                     log_text("you grab the vial of blue blood and pour it in.")
                     st.code(r'''
+                
               (
                )  )
            ______(____
           (___________)
+           /         \
+          /           \
+         |             |
      ____\             /____
     ()____'.__     __.'____()
-        ().'`        `'.()
+         .'` .'```'. `-.
+        ().'`       `'.()
 ''')
                     log_text("it puffs a cyan smoke.", "CYAN")
                     log_text(" Finally, you place the wings in, and watch as the potion completes.")
